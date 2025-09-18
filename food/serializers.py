@@ -1,14 +1,13 @@
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
-from apps.models import Category, Food, FoodImage
+from food.models import Category, Food, Bonus
 
 
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
         fields = ['name', 'id']
-        read_only_fields = ['id']
 
     def validate_name(self, value):
         if Category.objects.filter(name=value).first():
@@ -19,12 +18,16 @@ class CategorySerializer(ModelSerializer):
 class FoodSerializer(ModelSerializer):
     class Meta:
         model = Food
-        fields = "__all__"
-        read_only_fields = ['id']
+        fields = ["id", "name", "price", "category", "is_available", "image_url", "description", "bonus_price", "rate",
+                  "bonus_section", "restaurant"]
 
 
-class FoodImageSerializer(ModelSerializer):
+class BonusSerializer(ModelSerializer):
     class Meta:
-        model = FoodImage
-        fields = "__all__"
-        read_only_fields = ['id']
+        model = Bonus
+        fields = ["id", 'buy_count','add']
+
+# class FoodImageSerializer(ModelSerializer):
+#     class Meta:
+#         model = FoodImage
+#         fields = "__all__"

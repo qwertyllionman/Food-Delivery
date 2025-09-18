@@ -1,5 +1,5 @@
 """
-URL configuration for FoodDelivery project.
+URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -20,7 +20,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path("", include("apps.urls")),
+    path("", include("food.urls")),
+    path("", include("restaurant.urls")),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
 
     path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

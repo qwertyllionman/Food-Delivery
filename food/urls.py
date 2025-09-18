@@ -1,5 +1,5 @@
 """
-URL configuration for FoodDelivery project.
+URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.urls import path, include
 
-from apps.views import CreateCategoryApiView, DeleteCategoryApiView, ListCategoryApiView, CreateFoodImageApiView, \
-    DeleteFoodImageApiView, ListFoodImageApiView, DeleteFoodApiView, UpdateFoodApiView, ListFoodApiView, \
-    RetrieveFoodApiView, CreateFoodApiView
+from food.views import CreateCategoryApiView, DeleteCategoryApiView, ListCategoryApiView, DeleteFoodApiView, \
+    UpdateFoodApiView, ListFoodApiView, \
+    RetrieveFoodApiView, CreateFoodApiView, CreateBonusApiView, ListBonusApiView, GetBonusApiView, UpdateBonusApiView, \
+    DeleteBonusApiView, SearchFoodAPIView, GetCategoryApiView
 
 urlpatterns = []
 
@@ -28,15 +29,15 @@ urlpatterns += [
     path('api/v1/category/list', ListCategoryApiView.as_view()),
 
     path('api/v1/category/<int:pk>', DeleteCategoryApiView.as_view()),
-
+    path('api/v1/category/get/<int:pk>', GetCategoryApiView.as_view())
 ]
 
 # ---------------------------------- Food Image -------------------------------------------
-urlpatterns += [
-    path('api/v1/food-image/create', CreateFoodImageApiView.as_view()),
-    path('api/v1/food-image/<int:pk>', DeleteFoodImageApiView.as_view()),
-    path('api/v1/food-image/list', ListFoodImageApiView.as_view()),
-]
+# urlpatterns += [
+#     path('api/v1/food-image/create', CreateFoodImageApiView.as_view()),
+#     path('api/v1/food-image/<int:pk>', DeleteFoodImageApiView.as_view()),
+#     path('api/v1/food-image/list', ListFoodImageApiView.as_view()),
+# ]
 # ----------------------------------- Food --------------------------------------------------
 urlpatterns += [
     path('api/v1/food/create', CreateFoodApiView.as_view()),
@@ -44,4 +45,17 @@ urlpatterns += [
     path('api/v1/food/<int:pk>/update', UpdateFoodApiView.as_view()),
     path('api/v1/food/list', ListFoodApiView.as_view()),
     path('api/v1/food/<int:pk>/get', RetrieveFoodApiView.as_view())
+]
+# ------------------------------- Bonus -------------------------------------------------------
+urlpatterns += [
+    path('api/v1/bonus/create', CreateBonusApiView.as_view()),
+    path('api/v1/bonus/list', ListBonusApiView.as_view()),
+    path('api/v1/bonus/get/<int:pk>', GetBonusApiView.as_view()),
+    path('api/v1/bonus/update/<int:pk>', UpdateBonusApiView.as_view()),
+    path('api/v1/bonus/delete/<int:pk>', DeleteBonusApiView.as_view()),
+]
+
+# ---------------------------------------------- Filtering ----------------------------------------
+urlpatterns += [
+    path("api/v1/filter/search", SearchFoodAPIView.as_view()),
 ]
