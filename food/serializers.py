@@ -21,7 +21,6 @@ class FoodSerializer(ModelSerializer):
         fields = ["id", "name", "price", "category", "is_available", "image_url", "description", "bonus_price", "rate",
                   "bonus_section", "restaurant"]
 
-
 class BonusSerializer(ModelSerializer):
     class Meta:
         model = Bonus

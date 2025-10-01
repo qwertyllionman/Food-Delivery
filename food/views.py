@@ -56,6 +56,12 @@ class CreateFoodApiView(CreateAPIView):
     serializer_class = FoodSerializer
     parser_classes = [MultiPartParser, JSONParser, FormParser]
 
+    def perform_create(self, serializer):
+        bonus_price = float(serializer.validated_data["bonus_price"])
+        price = float(serializer.validated_data["price"])
+        if price >= bonus_price:
+            price -= bonus_price
+        serializer.save(price=price)
 
 @extend_schema(tags=['Food'])
 class UpdateFoodApiView(UpdateAPIView):

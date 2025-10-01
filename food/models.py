@@ -18,7 +18,6 @@ class Food(Model):
     description = TextField(null=True, blank=True)
     bonus_price = DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
     rate = DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    overall = DecimalField(max_digits=9, decimal_places=2)
     bonus_section = ForeignKey("food.Bonus", on_delete=SET_NULL, related_name='foods', null=True, blank=True)
     restaurant = ForeignKey("restaurant.Restaurant", on_delete=CASCADE, related_name="foods", null=True, blank=True)
 
